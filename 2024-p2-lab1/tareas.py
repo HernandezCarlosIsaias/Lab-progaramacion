@@ -186,19 +186,40 @@ def main(): # Definimos en el main del programa el procedimiento main donde no s
         menu()
         opcion = input("Seleccione una opción: ")
         if opcion == "1":
-            descripcion = input("Ingrese la descripción de la tarea: ")
-            if lista_tareas.buscar_tarea_descripcion(descripcion) == False:
-                prioridad = int(input("Ingrese la prioridad de la tarea (1 = baja, 2 = media, 3 = alta): "))
-                categoria = input("Ingrese la categoría de la tarea: ")
-                lista_tareas.agregar_tarea(descripcion, prioridad, categoria)
-            else:
-                print(f"Tarea con descripcion {descripcion} ya existente.")
+            control = False
+            while control == False:
+                try:
+                    descripcion = input("Ingrese la descripción de la tarea: ")
+                    if lista_tareas.buscar_tarea_descripcion(descripcion) == False:
+                        prioridad = int(input("Ingrese la prioridad de la tarea (1 = baja, 2 = media, 3 = alta): "))
+                        if prioridad > 0 and prioridad < 4: 
+                            categoria = input("Ingrese la categoría de la tarea: ")
+                            lista_tareas.agregar_tarea(descripcion, prioridad, categoria)
+                            control= True
+                        else: print("La prioriad debe ser 1 , 2 o 3")                          
+                    else:
+                        print(f"Tarea con descripcion {descripcion} ya existente.")
+                except ValueError:
+                    print("Debes ingresar una prioridad")
         elif opcion == "2":
-            id_tarea = int(input("Ingrese el ID de la tarea a completar: "))
-            lista_tareas.completar_tarea(id_tarea)
+            control= False
+            while control == False:
+                try:
+                    id_tarea = int(input("Ingrese el ID de la tarea a completar: "))
+                    lista_tareas.completar_tarea(id_tarea)
+                    control= True
+                    print("Tarea completada")
+                except ValueError:
+                    print("No ingresaste un numero")
         elif opcion == "3":
-            id_tarea = int(input("Ingrese el ID de la tarea a eliminar: "))
-            lista_tareas.eliminar_tarea(id_tarea)
+            control= False
+            while control == False:
+                try:
+                    id_tarea = int(input("Ingrese el ID de la tarea a eliminar: "))
+                    lista_tareas.eliminar_tarea(id_tarea)
+                    control= True
+                except ValueError:
+                    print("No ingresaste un numero")
         elif opcion == "4":
             texto= input("Ingrese la descripcion de la tarea: ")
             lista_tareas.buscar_tarea_descripcion(texto)
