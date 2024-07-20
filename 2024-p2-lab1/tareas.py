@@ -24,10 +24,10 @@ class ListaEnlazada: # Creamos el objeto de clase ListaEnlaazada
         return self.cabeza is None # Retorna si self.cabeza es None, devolviendo True o False
 
     def agregar_tarea(self, descripcion, prioridad, categoria): # Creamos un metodo dentro del objeto de la clase ListaEnlazada llamada agregar_tarea pasandole como parametro self, descripcion, prioridad y categoria
-        if categoria != "":
+        if categoria != "": # Compara si el parametro categoria es distinto o no de string vacio. En el caso de que la condicion se cumpla ingresa al if
             tarea = Tarea(self.id_actual, descripcion, prioridad, categoria) # Guardamos en la variable tarea el objeto de la clase Tarea donde le pasamos los parametros self.id_actual (que al principio tiene como valor 1), descripcion, prioridad y categoria
-        else:
-            tarea = Tarea(self.id_actual, descripcion, prioridad)
+        else: #En el caso de que la condiion anterior no se cumpla, ingresa al else
+            tarea = Tarea(self.id_actual, descripcion, prioridad) # Se crea una variable llamada tarea donde en este caso creamos el objeto de la clase Tarea pero excluyendo el parametro categoria
         nuevo_nodo = Nodo(tarea) # Guardamos en la variable nuevo_nodo el objeto de la clase Nodo pasandole como parámetro la variable tarea (es decir, el objeto creado de la clase Tarea)
         self.id_actual += 1 # Se incrementa el valor de self.id_actual que pertenece al constructor del objeto de la clase ListaEnlazada a +1
 
@@ -70,7 +70,7 @@ class ListaEnlazada: # Creamos el objeto de clase ListaEnlaazada
             if actual.tarea.id == id: # En el condicional if compara si el id de la tarea que se encuentra en self.cabeza es igual al id ingresado por el usuario. En el caso de que de True entra a este condicional
                 if previo is None: # Se vuelve a crear un condicional donde compara si el valor de la variable previo es None. En el caso de que sea True entra en el condicional
                     self.cabeza = actual.siguiente # Ahora en self.cabeza guardamos el valor de actual.siguiente
-                else: #! Si el if de la linea 70 es False, entra en el else
+                else: # Si la condicion mas cercana da como booleano False, ingresa al else
                     previo.siguiente = actual.siguiente # Actualizamos el valor de previo.siguiente y guardamos el valor de actual.siguiente
                 print(f"Tarea eliminada: {actual.tarea.descripcion}") # Imprimimos que la tarea fue eliminada con su respectiva descripcion
                 return # Se utiliza el return para finalizar el método
