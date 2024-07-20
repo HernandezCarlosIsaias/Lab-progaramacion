@@ -2,7 +2,7 @@ import csv
 import os
 
 class Tarea: # Creamos el objeto de clase Tarea
-    def __init__(self, id, descripcion, prioridad, categoria="General"): # Creamos el constructor del objeto de clase Tarea con los parámetros self, id, descripcion, prioridad y categoria
+    def __init__(self, id, descripcion, prioridad, categoria = "General"): # Creamos el constructor del objeto de clase Tarea con los parámetros self, id, descripcion, prioridad y categoria
         # En el caso de que el usuario no cargue un valor str en el parametro categoria la misma va a tener como valor "General"
         self.id = id # Guardamos el parametro id en la variable self.id
         self.descripcion = descripcion # Guardamos el parametro id en la variable self.id
@@ -194,8 +194,12 @@ def main(): # Definimos en el main del programa el procedimiento main donde no s
                         prioridad = int(input("Ingrese la prioridad de la tarea (1 = baja, 2 = media, 3 = alta): "))
                         if prioridad > 0 and prioridad < 4: 
                             categoria = input("Ingrese la categoría de la tarea: ")
-                            lista_tareas.agregar_tarea(descripcion, prioridad, categoria)
-                            control= True
+                            if categoria != "":
+                                lista_tareas.agregar_tarea(descripcion, prioridad, categoria)
+                                control= True
+                            else: 
+                                lista_tareas.agregar_tarea(descripcion, prioridad)
+                                control= True
                         else: print("La prioriad debe ser 1 , 2 o 3")                          
                     else:
                         print(f"Tarea con descripcion {descripcion} ya existente.")
