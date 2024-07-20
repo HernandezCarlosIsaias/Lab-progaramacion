@@ -24,7 +24,9 @@ class ListaEnlazada: # Creamos el objeto de clase ListaEnlaazada
         return self.cabeza is None # Retorna si self.cabeza es None, devolviendo True o False
 
     def agregar_tarea(self, descripcion, prioridad, categoria): # Creamos un metodo dentro del objeto de la clase ListaEnlazada llamada agregar_tarea pasandole como parametro self, descripcion, prioridad y categoria
-        tarea = Tarea(self.id_actual, descripcion, prioridad, categoria) # Guardamos en la variable tarea el objeto de la clase Tarea donde le pasamos los parametros self.id_actual (que al principio tiene como valor 1), descripcion, prioridad y categoria
+        if categoria != "":
+              tarea = Tarea(self.id_actual, descripcion, prioridad, categoria) # Guardamos en la variable tarea el objeto de la clase Tarea donde le pasamos los parametros self.id_actual (que al principio tiene como valor 1), descripcion, prioridad y categoria
+        else: tarea = Tarea(self.id_actual, descripcion, prioridad)
         nuevo_nodo = Nodo(tarea) # Guardamos en la variable nuevo_nodo el objeto de la clase Nodo pasandole como parámetro la variable tarea (es decir, el objeto creado de la clase Tarea)
         self.id_actual += 1 # Se incrementa el valor de self.id_actual que pertenece al constructor del objeto de la clase ListaEnlazada a +1
 
@@ -194,12 +196,8 @@ def main(): # Definimos en el main del programa el procedimiento main donde no s
                         prioridad = int(input("Ingrese la prioridad de la tarea (1 = baja, 2 = media, 3 = alta): "))
                         if prioridad > 0 and prioridad < 4: 
                             categoria = input("Ingrese la categoría de la tarea: ")
-                            if categoria != "":
-                                lista_tareas.agregar_tarea(descripcion, prioridad, categoria)
-                                control= True
-                            else: 
-                                lista_tareas.agregar_tarea(descripcion, prioridad)
-                                control= True
+                            lista_tareas.agregar_tarea(descripcion, prioridad, categoria)
+                            control= True
                         else: print("La prioriad debe ser 1 , 2 o 3")                          
                     else:
                         print(f"Tarea con descripcion {descripcion} ya existente.")
