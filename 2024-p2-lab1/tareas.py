@@ -19,6 +19,10 @@ class ListaEnlazada: # Creamos el objeto de clase ListaEnlaazada
     def __init__(self): # Creamos el constructor del objeto de clase ListaEnalazada con el parametro self
         self.cabeza = None # Creamos una variable llamada self.cabeza donde cada nuevo objeto de la clase ListaEnalazada siempre va a empezar a tener como valor en dicha variable el valor None
         self.id_actual = 1 # Creamos una variable llamada self.id_actual donde cada nuevo objeto de la clase ListaEnalazada siempre va a empezar a tener como valor en dicha variable el valor 1
+        self.contador_total = 0
+        self.contador_prioridad1= 0
+        self.contador_prioridad2= 0
+        self.contador_prioridad3= 0
 
     def esta_vacia(self): # Creamos un metodo dentro del objeto de la clase ListaEnlazada llamada esta_vacia pasandole como parametro self
         return self.cabeza is None # Retorna si self.cabeza es None, devolviendo True o False
@@ -40,11 +44,13 @@ class ListaEnlazada: # Creamos el objeto de clase ListaEnlaazada
             while actual.siguiente is not None and actual.siguiente.tarea.prioridad >= tarea.prioridad: # Creamos un bucle cuando mientras el siguiente del valor de actual (siendo self.cabeza que dentro del mismo tendremos un objeto de la clase Nodo) no sea None y que la prioridad de la tarea del siguiente de actual (self.cabeza) sea mayor o igual a la prioridad de la nueva tarea que queremos agregar
                 # Entra en dicho bucle en el caso de que ambas condiciones mencionadas en la linea anterior den como valor booleano True, sino salta directamente a la linea 40
                 actual = actual.siguiente # Pisamos la variable actual donde ahora en vez de valer self.cabeza va a valer actual.siguiente (este actual.siguiente es el objeto de la clase Nodo que se encuentra dentro de self.cabeza que pertenece al objeto de la clase ListaEnlazada)
+                if tarea.prioridad == 1: self.contador_prioridad1 += 1
+                elif tarea.prioridad == 2: self.contador_prioridad2 += 1     
+                else: self.contador_prioridad3 += 1  
             nuevo_nodo.siguiente = actual.siguiente # En el siguiente del nuevo nodo que creamos guardamos el valor de la variable actual.siguiente
             actual.siguiente = nuevo_nodo # En actual.siguiente guardamos el valor del objeto nuevo_nodo
-
         print("Tarea agregada con éxito.") # Se muestra en pantalla el string "Tarea agregada con exito"
-
+        self.contador_total =+ 1
     def buscar_tarea_descripcion(self,text)->True: # Creamos un metodo dentro del objeto de la clase ListaEnlazada llamada buscar_tarea_descripcion pasandole como parametro self y text
         actual = self.cabeza # Creamos la variable actual donde guardamos self.cabeza perteneciente de la clase ListaEnlazada
         encontrada = False # Creamos una variable encontrada donde guardamos como valor el booleano False
@@ -59,6 +65,9 @@ class ListaEnlazada: # Creamos el objeto de clase ListaEnlaazada
         while actual is not None: # En el ciclo while compara si actual no es None, es decir, si la lista no esta vacia. Si es true entra en el bucle
             if actual.tarea.id == id: # Compara si el id de la tarea que se encuentra en self.cabeza es igual al id que le pasa el usuario
                 actual.tarea.completada = True # Si se entra al condicional de la linea anterior se reemplaza el valor que se encuentra en la variable completada del objeto de la clase Tarea por True
+                if actual.tarea.prioridad == 1: self.contador_prioridad1 -= 1
+                elif actual.tarea.prioridad == 2: self.contador_prioridad2 -= 1     
+                else: self.contador_prioridad3 -= 1  
                 return # Se utiliza el return para finalizar el método
             actual = actual.siguiente # Si el condicional de la linea 59 da como booleano False, cambia el valor de actual por el siguiente Nodo 
         print(f"Tarea con ID {id} no encontrada.") # En el caso de que el while de false, imprime en pantalla que la tarea con el id que le pasó el usuario no fue encontrada
@@ -73,11 +82,17 @@ class ListaEnlazada: # Creamos el objeto de clase ListaEnlaazada
                 else: # Si la condicion mas cercana da como booleano False, ingresa al else
                     previo.siguiente = actual.siguiente # Actualizamos el valor de previo.siguiente y guardamos el valor de actual.siguiente
                 print(f"Tarea eliminada: {actual.tarea.descripcion}") # Imprimimos que la tarea fue eliminada con su respectiva descripcion
+                self.contador_total -= 1
+                if actual.tarea.completada == False: 
+                    if actual.tarea.prioridad == 1: self.contador_prioridad1 -= 1
+                    elif actual.tarea.prioridad == 2: self.contador_prioridad2 -= 1     
+                    else: self.contador_prioridad3 -= 1  
+                
                 return # Se utiliza el return para finalizar el método
             previo = actual # Se actualiza el valor de la variable previo por el valor de actual (siendo el nodo que se encuentra en self.cabeza) 
             actual = actual.siguiente # Actualiza el valor de actual con el valor de actual.siguiente (siendo actual un objeto de la clase Nodo)
         print(f"Tarea con ID {id} no encontrada.") # En el caso de que el ciclo while de false, imprime en pantalla que la tarea con el id que le pasó el usuario no fue encontrada
-
+        
     def mostrar_tareas(self): # Creamos un metodo dentro del objeto de la clase ListaEnlazada llamada mostrar_tareas pasandole como parametro self
         print("\n*** TAREAS ***") # Se imprime en pantalla el string *** TAREAS ***
         actual = self.cabeza # En la variable actual guardamos el valor de self.cabeza (siendo que aquí adentro tendremos guardado un objeto de clase Nodo)
@@ -117,16 +132,21 @@ class ListaEnlazada: # Creamos el objeto de clase ListaEnlaazada
     # Funciones estadisticas:
     def contar_tareas_pendientes(self)->int: # Creamos un metodo dentro del objeto de la clase ListaEnlazada llamada contar_tareas_pendientes pasandole como parametro self
         actual = self.cabeza # En la variable actual guardamos el valor de self.cabeza (siendo que aquí adentro tendremos guardado un objeto de clase Nodo)
-        contador = 0 # Creamos la variable contador donde le asginamos dentro de la misma el valor entero 0
+        contador_pendiente = 0 # Creamos la variable contador donde le asginamos dentro de la misma el valor entero 0
         while actual is not None: # En el ciclo while compara si actual no es none, es decir, si la lista no esta vacia. Si es true entra en el bucle
             if actual.tarea.completada == False: # Compara si el valor de la variable del objeto Tarea guardada en el Nodo en self.cabeza es igual a False. Si dicha condicion dd True, ingresa. Si no, la saltea
-                contador += 1 # En el caso de que el if de la linea anterior cumpla la condicion, se le suma a la variable contador +1          
+                contador_pendiente += 1 # En el caso de que el if de la linea anterior cumpla la condicion, se le suma a la variable contador +1          
             actual = actual.siguiente # Se reemplaza el valor de actual con el valor de actual.siguiente
-        return contador # Cuando el ciclo while de False, retorna el valor de la variable contador 
+        return contador_pendiente # Cuando el ciclo while de False, retorna el valor de la variable contador 
     
     def mostrar_estadisticas(self)->None:
-        pass
-        
+        tarea_pendiente = self.contar_tareas_pendientes()
+        print(tarea_pendiente)
+        print(self.contador_total)
+        tareas_completadas=  (100 * (self.contador_total - tarea_pendiente)) / self.contador_total 
+        print(f"El porcentaje de las tareas completadas es: {tareas_completadas}%")
+        print(f"La cantidad de tareas pendientes es: \nde prioridad 1: {self.contador_prioridad1} tareas.\nde prioridad 2: {self.contador_prioridad2} tareas.\nde prioridad 3: {self.contador_prioridad3} tareas.")
+       
     # Carga y guardado de archivos
     def guardar_en_csv(self, archivo):
         with open(archivo, mode='w', newline='') as file:
@@ -164,6 +184,11 @@ class ListaEnlazada: # Creamos el objeto de clase ListaEnlaazada
 
         if tarea.id >= self.id_actual:
             self.id_actual = tarea.id + 1
+        self.contador_total += 1
+        if nuevo_nodo.tarea.completada == False: 
+            if nuevo_nodo.tarea.prioridad == 1: self.contador_prioridad1 += 1
+            elif nuevo_nodo.tarea.prioridad == 2: self.contador_prioridad2 += 1     
+            else: self.contador_prioridad3 += 1 
 
 def menu(): # Definimos en el main del programa el procedimiento menu donde no se le pasa ningun parametro
     print("\nMenú:") # Imprime en pantalla el str Menú
@@ -176,7 +201,8 @@ def menu(): # Definimos en el main del programa el procedimiento menu donde no s
     print("7. Mostrar tareas por descripcion") # Imprime en pantalla el str 6. Mostrar tareas por descripcion
     print("8. Guardar tareas en archivo CSV") # Imprime en pantalla el str 8. Guardar tareas en archivo CSV
     print("9. Cargar tareas desde archivo CSV") # Imprime en pantalla el str 9. Cargar tareas desde archivo CSV
-    print("10. Salir") # Imprime en pantalla el str 10. Salir
+    print("10. estadisticas") # Imprime en pantalla el str 10. Salir
+    print("11. Salir")
 
 def main(): # Definimos en el main del programa el procedimiento main donde no se le pasa ningun parametro
     lista_tareas = ListaEnlazada() # Se guarda en la variable lista_tareas el objeto de la clase ListaEnlazada, donde no se le pasa ningun parametro
@@ -249,10 +275,13 @@ def main(): # Definimos en el main del programa el procedimiento main donde no s
         elif opcion == "9":
             lista_tareas.cargar_desde_csv(archivo_csv)
         elif opcion == "10":
+            lista_tareas.mostrar_estadisticas()
+        elif opcion == "11":
             print("Saliendo del sistema de gestión de tareas.")
             break
         else:
             print("Opción no válida. Por favor, seleccione una opción válida.")
+
 
 if __name__ == "__main__":
     main()
