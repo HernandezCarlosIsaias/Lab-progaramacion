@@ -191,31 +191,30 @@ def main(): # Definimos en el main del programa el procedimiento main donde no s
         if opcion == "1":
             control = False
             while control == False:
-                try:
-                    descripcion = input("Ingrese la descripción de la tarea: ")
-                    if descripcion != "":
-                        if lista_tareas.buscar_tarea_descripcion(descripcion) == False:
+                descripcion = input("Ingrese la descripción de la tarea: ")
+                if descripcion != "":
+                    if lista_tareas.buscar_tarea_descripcion(descripcion) == False:
+                        try:
                             prioridad = int(input("Ingrese la prioridad de la tarea (1 = baja, 2 = media, 3 = alta): "))
-                            if prioridad > 0 and prioridad < 4: 
-                                categoria = input("Ingrese la categoría de la tarea: ") 
-                                lista_tareas.agregar_tarea(descripcion, prioridad, categoria)
-                                control = True
-                            else: 
-                                print("La prioriad debe ser 1, 2 o 3")                      
-                        else:
-                            des_existente = input(f"Tarea con descripcion {descripcion} ya existente. ¿Desea agregar una tarea? Responda con SI o NO: ")
-                            while des_existente.lower() != "si" and des_existente.lower() != "no":
-                                des_existente = input("Texto no valido. Debe escribir SI o NO: ")
-                            if des_existente.lower() == "no":
-                                break
+                            while prioridad <= 0 or prioridad >= 4:
+                                prioridad = int(input("Numero no valido. Ingrese la prioridad de la tarea (1 = baja, 2 = media, 3 = alta):  ")) 
+                            categoria = input("Ingrese la categoría de la tarea: ") 
+                            lista_tareas.agregar_tarea(descripcion, prioridad, categoria)
+                            control = True                 
+                        except ValueError:
+                            print("Debes ingresar una prioridad")
                     else:
-                        opcion_tarea = input("Debe escribir la descripcion de la tarea. ¿Desea agregar una tarea? Responda con SI o NO: ")
-                        while opcion_tarea.lower() != "si" and opcion_tarea.lower() != "no":
-                            opcion_tarea = input("Texto no valido. Debe escribir SI o NO: ")
-                        if opcion_tarea.lower() == "no":
+                        des_existente = input(f"Tarea con descripcion {descripcion} ya existente. ¿Desea agregar una tarea? Responda con SI o NO: ")
+                        while des_existente.lower() != "si" and des_existente.lower() != "no":
+                            des_existente = input("Texto no valido. Debe escribir SI o NO: ")
+                        if des_existente.lower() == "no":
                             break
-                except ValueError:
-                    print("Debes ingresar una prioridad")
+                else:
+                    opcion_tarea = input("Debe escribir la descripcion de la tarea. ¿Desea agregar una tarea? Responda con SI o NO: ")
+                    while opcion_tarea.lower() != "si" and opcion_tarea.lower() != "no":
+                            opcion_tarea = input("Texto no valido. Debe escribir SI o NO: ")
+                    if opcion_tarea.lower() == "no":
+                        break
         elif opcion == "2":
             control= False
             while control == False:
