@@ -50,7 +50,7 @@ class ListaEnlazada: # Creamos el objeto de clase ListaEnlaazada
             nuevo_nodo.siguiente = actual.siguiente # En el siguiente del nuevo nodo que creamos guardamos el valor de la variable actual.siguiente
             actual.siguiente = nuevo_nodo # En actual.siguiente guardamos el valor del objeto nuevo_nodo
         print("Tarea agregada con éxito.") # Se muestra en pantalla el string "Tarea agregada con exito"
-        self.contador_total =+ 1
+        self.contador_total += 1
     def buscar_tarea_descripcion(self,text)->True: # Creamos un metodo dentro del objeto de la clase ListaEnlazada llamada buscar_tarea_descripcion pasandole como parametro self y text
         actual = self.cabeza # Creamos la variable actual donde guardamos self.cabeza perteneciente de la clase ListaEnlazada
         encontrada = False # Creamos una variable encontrada donde guardamos como valor el booleano False
@@ -220,15 +220,19 @@ def main(): # Definimos en el main del programa el procedimiento main donde no s
                 descripcion = input("Ingrese la descripción de la tarea: ")
                 if descripcion != "":
                     if lista_tareas.buscar_tarea_descripcion(descripcion) == False:
-                        try:
-                            prioridad = int(input("Ingrese la prioridad de la tarea (1 = baja, 2 = media, 3 = alta): "))
-                            while prioridad <= 0 or prioridad >= 4:
-                                prioridad = int(input("Numero no valido. Ingrese la prioridad de la tarea (1 = baja, 2 = media, 3 = alta):  ")) 
-                            categoria = input("Ingrese la categoría de la tarea: ") 
-                            lista_tareas.agregar_tarea(descripcion, prioridad, categoria)
-                            control = True                 
-                        except ValueError:
-                            print("Debes ingresar una prioridad")
+                        error= True
+                        while error == True:
+                            try:
+                                prioridad = int(input("Ingrese la prioridad de la tarea (1 = baja, 2 = media, 3 = alta): "))
+                                while prioridad <= 0 or prioridad >= 4:
+                                    prioridad = int(input("Numero no valido. Ingrese la prioridad de la tarea (1 = baja, 2 = media, 3 = alta):  ")) 
+                                categoria = input("Ingrese la categoría de la tarea: ") 
+                                lista_tareas.agregar_tarea(descripcion, prioridad, categoria)
+                                control = True 
+                                error= False                
+                            except ValueError:
+                                print("Debes ingresar una prioridad")
+                                error= True
                     else:
                         des_existente = input(f"Tarea con descripcion {descripcion} ya existente. ¿Desea agregar una tarea? Responda con SI o NO: ")
                         while des_existente.lower() != "si" and des_existente.lower() != "no":
