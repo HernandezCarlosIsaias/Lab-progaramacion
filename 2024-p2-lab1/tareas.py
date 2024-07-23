@@ -153,6 +153,19 @@ class ListaEnlazada: # Creamos el objeto de clase ListaEnlaazada
         if control == False: # Se compara si el booleano de la variable control es False. Si dicha condicion da True, ingresa al if; si no, lo saltea
             print(f"No existen tareas con descripcion {text}") # Se imprime en la pantalla el str no hay tareas existentes con la descripcion escrita por el usuario
     
+    def mostrar_tareas_categoria(self,text)->None: # Creamos un metodo dentro del objeto de la clase ListaEnlazada llamada mostrar_tareas_categoria pasandole como parametro self y text
+        print("\n*** TAREAS ***") # Se imprime en pantalla el string *** TAREAS ***
+        actual = self.cabeza # En la variable actual guardamos el valor de self.cabeza (siendo que aquí adentro tendremos guardado un objeto de clase Nodo)
+        control = False # Se crea una variable llamada control donde guardamos el valor booleano False
+        while actual is not None: # En el ciclo while compara si actual no es none, es decir, si la lista no esta vacia. Si es true entra en el bucle
+            if actual.tarea.categoria.lower() == text.lower(): # Convertimos los str del texto ingresado por el usuario y la categoria de la tarea en la variable actual en minusculas. Si son iguales entra en el if
+                estado = "Completada" if actual.tarea.completada else "Pendiente" # Guarda el string "Completada" en la variable estado si el valor de la tarea completada en self.cabeza es True, en caso contrario guarda el str "Pendiente"
+                print(f"ID: {actual.tarea.id}, Descripción: {actual.tarea.descripcion}, Prioridad: {actual.tarea.prioridad}, Estado: {estado}") # Si se cumple la condicion de la linea anterior imprime todos los atributos y el estado
+                control = True # Se actualiza el valor de la variable control por el booleano True     
+            actual = actual.siguiente # Se reemplaza el valor de actual con el valor de actual.siguiente
+        if control == False: # Se compara si el booleano de la variable control es False. Si dicha condicion da True, ingresa al if; si no, lo saltea
+            print(f"No existen tareas con categoria {text}") # Se imprime en la pantalla el str no hay tareas existentes con la categoria escrita por el usuario
+    
     # Metodo contar tareas pendientes lineal
     def contar_tareas_pendientes_lineal(self)->int: # Creamos un metodo dentro del objeto de la clase ListaEnlazada llamada contar_tareas_pendientes (siendo de notacion O(n)) pasandole como parametro self
         actual = self.cabeza # En la variable actual guardamos el valor de self.cabeza (siendo que aquí adentro tendremos guardado un objeto de clase Nodo)
@@ -235,11 +248,12 @@ def menu(): # Definimos en el main del programa el procedimiento menu donde no s
     print("4. Mostrar todas las tareas") # Imprime en pantalla el str "4. Mostrar todas las tareas"
     print("5. Mostrar tareas pendientes") # Imprime en pantalla el str "5. Mostrar tareas pendientes"
     print("6. Mostrar tareas por descripcion") # Imprime en pantalla el str "6. Mostrar tareas por descripcion"
-    print("7. Contar tareas pendientes") # Imprime en pantalla el str "7. Contar tareas pendientes"
-    print("8. Estadisticas") # Imprime en pantalla el str "8. Estadisticas"
-    print("9. Guardar tareas en archivo CSV") # Imprime en pantalla el str "9. Guardar tareas en archivo CSV"
-    print("10. Cargar tareas desde archivo CSV") # Imprime en pantalla el str "10. Cargar tareas desde archivo CSV" 
-    print("11. Salir") # Imprime en pantalla el str "11. Salir"
+    print("7. Mostrar tareas por categoria") # Imprime en pantalla el str "7. Mostrar tareas por categoria"
+    print("8. Contar tareas pendientes") # Imprime en pantalla el str "8. Contar tareas pendientes"
+    print("9. Estadisticas") # Imprime en pantalla el str "9. Estadisticas"
+    print("10. Guardar tareas en archivo CSV") # Imprime en pantalla el str "10. Guardar tareas en archivo CSV"
+    print("11. Cargar tareas desde archivo CSV") # Imprime en pantalla el str "11. Cargar tareas desde archivo CSV" 
+    print("12. Salir") # Imprime en pantalla el str "12. Salir"
 
 # Segun la opcion que ingrese el usuario se ejecutara el medoto correspondiente
 
@@ -317,19 +331,23 @@ def main(): # Definimos en el main del programa el procedimiento main donde no s
             lista_tareas.mostrar_tareas_descripcion(texto) # Se llama a la lista enlazada y se ingresa al metodo mostrar_tareas_descripcion y se le pasa la variable texto
         
         elif opcion == "7": # Si la opcion que ingresa el usuario es igual a 7, ingresa a este elif
+            texto= input("Ingrese la categoria de la tarea: ") # Se declara la variable texto que guarda un input 
+            lista_tareas.mostrar_tareas_categoria(texto) # Se llama a la lista enlazada y se ingresa al metodo mostrar_tareas_categoria y se le pasa la variable texto
+
+        elif opcion == "8": # Si la opcion que ingresa el usuario es igual a 7, ingresa a este elif
             total = lista_tareas.contar_tareas_pendientes() # Se llama al metodo contar_tareas_pendientes de la clase ListaEnlazada y se guarda su valor en la variable total
             print(f"Cantidad pendiente: {total} tarea/s.") # Imprime en pantalla el str de la cantidad de las tareas pendientes con el valor que se encuentra en la variable total
         
-        elif opcion == "8": # Si ingresa la opcion 8 entra en el elif
+        elif opcion == "9": # Si ingresa la opcion 8 entra en el elif
             lista_tareas.mostrar_estadisticas() # Se llama a la lista enlazada y entra en el metodo de mostrar_estadisticas
         
-        elif opcion == "9": # Si la opcion ingresada es 9 entra en el elif
+        elif opcion == "10": # Si la opcion ingresada es 9 entra en el elif
             lista_tareas.guardar_en_csv(archivo_csv) # Llama al metodo guardar_en_csv y guarda todas las tareas creadas en el csv
         
-        elif opcion == "10": # Si ingresa la opcion 10 entra en el elif
+        elif opcion == "11": # Si ingresa la opcion 10 entra en el elif
             lista_tareas.cargar_desde_csv(archivo_csv) #  Se llama a la lista enlazada y entra en el metodo cargar_desde_csv y se le pasa archivo_csv
         
-        elif opcion == "11": # Si la opcion ingresada es 11 entra en el elif
+        elif opcion == "12": # Si la opcion ingresada es 11 entra en el elif
             print("Saliendo del sistema de gestión de tareas.") # Imprime por pantalla que se esta saliendo del sistema
             break # Finaliza el while del menu
         
