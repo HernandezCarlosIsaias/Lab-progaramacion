@@ -232,14 +232,14 @@ def menu(): # Definimos en el main del programa el procedimiento menu donde no s
     print("1. Agregar tarea") # Imprime en pantalla el str 1. Agregar tarea
     print("2. Completar tarea") # Imprime en pantalla el str 2. Completar tarea
     print("3. Eliminar tarea") # Imprime en pantalla el str 3. Eliminar tarea
-    print("4. Mostrar todas las tareas") # Imprime en pantalla el str "5. Mostrar todas las tareas"
-    print("5. Mostrar tareas pendientes") # Imprime en pantalla el str "6. Mostrar tareas pendientes"
-    print("6. Mostrar tareas por descripcion") # Imprime en pantalla el str "7. Mostrar tareas por descripcion"
-    print("7. Contar tareas pendientes") # Imprime en pantalla el str "8. Contar tareas pendientes"
-    print("8. Estadisticas") # Imprime en pantalla el str "9. Estadisticas"
-    print("9. Guardar tareas en archivo CSV") # Imprime en pantalla el str "10. Guardar tareas en archivo CSV"
-    print("10. Cargar tareas desde archivo CSV") # Imprime en pantalla el str "11. Cargar tareas desde archivo CSV" 
-    print("11. Salir") # Imprime en pantalla el str "12. Salir"
+    print("4. Mostrar todas las tareas") # Imprime en pantalla el str "4. Mostrar todas las tareas"
+    print("5. Mostrar tareas pendientes") # Imprime en pantalla el str "5. Mostrar tareas pendientes"
+    print("6. Mostrar tareas por descripcion") # Imprime en pantalla el str "6. Mostrar tareas por descripcion"
+    print("7. Contar tareas pendientes") # Imprime en pantalla el str "7. Contar tareas pendientes"
+    print("8. Estadisticas") # Imprime en pantalla el str "8. Estadisticas"
+    print("9. Guardar tareas en archivo CSV") # Imprime en pantalla el str "9. Guardar tareas en archivo CSV"
+    print("10. Cargar tareas desde archivo CSV") # Imprime en pantalla el str "10. Cargar tareas desde archivo CSV" 
+    print("11. Salir") # Imprime en pantalla el str "11. Salir"
 
 # Segun la opcion que ingrese el usuario se ejecutara el medoto correspondiente
 
