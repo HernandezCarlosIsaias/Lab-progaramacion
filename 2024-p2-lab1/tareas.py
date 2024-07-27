@@ -5,7 +5,7 @@ class Tarea: # Creamos el objeto de clase Tarea
     def __init__(self, id, descripcion, prioridad, categoria = "General"): # Creamos el constructor del objeto de clase Tarea con los parámetros self, id, descripcion, prioridad y categoria
         # En el caso de que el usuario no cargue un valor str en el parametro categoria la misma va a tener como valor "General"
         self.id = id # Guardamos el parametro id en la variable self.id
-        self.descripcion = descripcion # Guardamos el parametro id en la variable self.id
+        self.descripcion = descripcion # Guardamos el parametro descripcion en la variable self.descripcion
         self.prioridad = prioridad # Guardamos el parametro prioridad en la variable self.prioridad
         self.completada = False # Creamos una variable llamada self.completada donde cada nuevo objeto de la clase Tarea siempre va a empezar a tener como valor en dicha variable el valor False
         self.categoria = categoria # Guardamos el parametro categoria en la variable self.categoria
@@ -334,20 +334,20 @@ def main(): # Definimos en el main del programa el procedimiento main donde no s
             texto= input("Ingrese la categoria de la tarea: ") # Se declara la variable texto que guarda un input 
             lista_tareas.mostrar_tareas_categoria(texto) # Se llama a la lista enlazada y se ingresa al metodo mostrar_tareas_categoria y se le pasa la variable texto
 
-        elif opcion == "8": # Si la opcion que ingresa el usuario es igual a 7, ingresa a este elif
+        elif opcion == "8": # Si la opcion que ingresa el usuario es igual a 8, ingresa a este elif
             total = lista_tareas.contar_tareas_pendientes() # Se llama al metodo contar_tareas_pendientes de la clase ListaEnlazada y se guarda su valor en la variable total
             print(f"Cantidad pendiente: {total} tarea/s.") # Imprime en pantalla el str de la cantidad de las tareas pendientes con el valor que se encuentra en la variable total
         
-        elif opcion == "9": # Si ingresa la opcion 8 entra en el elif
+        elif opcion == "9": # Si ingresa la opcion 9 entra en el elif
             lista_tareas.mostrar_estadisticas() # Se llama a la lista enlazada y entra en el metodo de mostrar_estadisticas
         
-        elif opcion == "10": # Si la opcion ingresada es 9 entra en el elif
+        elif opcion == "10": # Si la opcion ingresada es 10 entra en el elif
             lista_tareas.guardar_en_csv(archivo_csv) # Llama al metodo guardar_en_csv y guarda todas las tareas creadas en el csv
         
-        elif opcion == "11": # Si ingresa la opcion 10 entra en el elif
+        elif opcion == "11": # Si ingresa la opcion 11 entra en el elif
             lista_tareas.cargar_desde_csv(archivo_csv) #  Se llama a la lista enlazada y entra en el metodo cargar_desde_csv y se le pasa archivo_csv
         
-        elif opcion == "12": # Si la opcion ingresada es 11 entra en el elif
+        elif opcion == "12": # Si la opcion ingresada es 12 entra en el elif
             print("Saliendo del sistema de gestión de tareas.") # Imprime por pantalla que se esta saliendo del sistema
             break # Finaliza el while del menu
         
