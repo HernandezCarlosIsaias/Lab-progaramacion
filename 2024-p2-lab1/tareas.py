@@ -274,7 +274,7 @@ def main(): # Definimos en el main del programa el procedimiento main donde no s
                 descripcion = input("Ingrese la descripción de la tarea: ") # Mediante un input le pedimos al usuario que ingrese la descripcion de la tarea
                 if descripcion != "": # Si la descripcion es distinto a un str vacio entra al if
                     if lista_tareas.buscar_tarea_descripcion(descripcion) == False: # Mediante el metodo buscar_tarea_descripcion busca si la tarea ya no fue creada si es false entra al if
-                        error= True # Creamos la variable error y le guardamos el valor true
+                        error = True # Creamos la variable error y le guardamos el valor true
                         while error == True: # Si error es igual a true entra al  while                         
                             try: # Colocamos un try para manejar el error si el usuario ingresa un valor que no se pueda convertir en un int
                                 prioridad = int(input("Ingrese la prioridad de la tarea (1 = baja, 2 = media, 3 = alta): ")) # Creamos la variable prioridad y le pedimos al usuario que ingrese 1, 2 o 3
@@ -283,7 +283,7 @@ def main(): # Definimos en el main del programa el procedimiento main donde no s
                                 categoria = input("Ingrese la categoría de la tarea: ") # Creamos la variable categoria y pedimos al usuario que ingrese la categoria de la tarea
                                 lista_tareas.agregar_tarea(descripcion, prioridad, categoria) # Se llama al metodo agregar_tarea y se le pasan los parametros descripcion, prioridad, categoria
                                 control = True # A la variable control le cambiamos el valor por true
-                                error= False  # A la variable error le cambiamos el valor por false              
+                                error = False  # A la variable error le cambiamos el valor por false              
                             except ValueError: # Si la variable prioridad da un error ValueError ingresa
                                 print("Debes ingresar una prioridad") # Se le imprime por pantalla que debe ingresar una prioridad
                     else: # Si no se cumple el ultimo if mas cercano, ingresa al else
@@ -300,12 +300,12 @@ def main(): # Definimos en el main del programa el procedimiento main donde no s
                         break # Finaliza el ciclo while
         
         elif opcion == "2": # Si ingresa la opcion 2 entra al elif
-            control= False # Se declara una variable llamada "control"
+            control = False # Se declara una variable llamada "control"
             while control == False: # Se declara un ciclo while que compara si "control es igual a False"
                 try: # Colocamos un try para manejar el error si el usuario ingresa un valor que no se pueda convertir en un int
                     id_tarea = int(input("Ingrese el ID de la tarea a completar: ")) # Se declara la variable id_tarea que guarda el input y lo convierte en un int
                     lista_tareas.completar_tarea(id_tarea) # Se llama a la lista enlazada con el metodo completar tarea y se le pasa el id_tarea
-                    control= True # Se declara la variable control con un valor True
+                    control = True # Se declara la variable control con un valor True
                     print("Tarea completada") # Se imprime en pantalla "Tarea completada"
                 except ValueError: # Si la variable id_tarea da un error de tipo ValueError entra
                     print("No ingresaste un numero") # Se imprime por pantalla "No ingresaste un numero"
